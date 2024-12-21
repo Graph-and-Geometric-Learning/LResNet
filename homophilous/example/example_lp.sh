@@ -1,0 +1,4 @@
+python train.py --task lp --dataset disease_lp --model SkipHGNN --dim 16 --num-layers 3 --bias 1 --normalize-feats 0 --manifold Lorentz --log-freq 5 --lr 0.005 --weight-decay 0 --margin 30 --dropout 0 --grad-clip 0.5 --cuda -1 --patience 800 --seed 1234 --c 2.0
+python train.py --task lp --dataset airport --model SkipHGNN --lr 0.01 --dim 16 --num-layers 3 --bias 1 --dropout 0.0 --weight-decay 0.1 --manifold Lorentz --log-freq 5 --cuda -1 --patience 800 --seed 1234 --c 2.0
+python train.py --task lp --dataset cora --model SkipHGNN --lr 0.001 --dim 16 --num-layers 3  --bias 1 --dropout 0.7 --weight-decay 0.001 --manifold Lorentz --log-freq 5 --cuda -1 --patience 1500 --grad-clip 0.5 --margin 0.1 --seed 1234 --c None
+python train.py --task lp --dataset pubmed --model SkipHGNN --dim 16 --lr 0.001 --dim 16 --num-layers 3 --bias 1 --dropout 0.5 --weight-decay 0 --margin 0.3 --grad-clip 0.5 --patience 1500 --manifold Lorentz --log-freq 5 --cuda -1 --seed 1234 --c None

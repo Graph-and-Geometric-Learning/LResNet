@@ -1,0 +1,2 @@
+python main.py --backbone gcn --dataset squirrel --lr 0.01 --num_layers 5  --hidden_channels 32  --weight_decay 0  --dropout 0  --method Skip --device 2 --runs 1 --epochs 200 --cpu --seed 1234
+python main.py --backbone gcn --dataset chameleon --lr 0.001  --num_layers 5 --hidden_channels 16 --weight_decay 1e-4  --dropout 0.2 --method Skip --device 2 --runs 1 --epochs 200 --cpu --seed 1234

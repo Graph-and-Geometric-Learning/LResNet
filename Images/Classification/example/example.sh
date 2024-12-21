@@ -1,0 +1,1 @@
+python train.py -c Classification\config\LRN-ResNet18.txt  

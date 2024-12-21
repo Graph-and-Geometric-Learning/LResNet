@@ -1,0 +1,6 @@
+[DATASETS]
+Cifar10 = cifar10
+Cifar100 = cifar100
+Places365 = ood_data/Places365
+SVHN = ood_data/SVHN
+Textures = ood_data/Textures/images

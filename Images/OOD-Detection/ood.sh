@@ -1,0 +1,1 @@
+python -m ood_detection --model lrn-8-16-32-resnet-20 --dataset cifar10 --num_to_avg 10
