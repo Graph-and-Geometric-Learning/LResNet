@@ -262,7 +262,7 @@ class Lorentz(LorentzOri):
         denom = denom.abs().clamp_min(1e-8).sqrt()
         return ave / denom
     def add_time(self, x_space):
-        x_time = ((x_space ** 2).sum(-1, keepdims=True) + self.k.reciprocal()).clamp_min(1e-6).sqrt()
+        x_time = ((x_space ** 2).sum(-1, keepdims=True) + self.k).clamp_min(1e-6).sqrt()
         x = torch.cat([x_time, x_space], dim=-1)
         return x
 

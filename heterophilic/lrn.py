@@ -62,7 +62,7 @@ class LorentzDecoder(Decoder):
 
     def forward(self, input):
         x, adj = input
-        return (2 * self.c.reciprocal() + 2 * self.manifold.cinner(x, self.cls)) + self.bias, adj
+        return (2 * self.c + 2 * self.manifold.cinner(x, self.cls)) + self.bias, adj
 
 class HyboNet(Encoder):
     """
@@ -140,8 +140,8 @@ class LorentzLinear(nn.Module):
             x = self.nonlin(x)
         x = self.weight(self.dropout(x))
         x_narrow = x.narrow(-1, 1, x.shape[-1] - 1)
-        time = x.narrow(-1, 0, 1).sigmoid() * (self.scale.exp()).clamp_max(10) + (self.c.sqrt().reciprocal() + 0.5)
-        scale = (time * time - self.c.reciprocal()) / \
+        time = x.narrow(-1, 0, 1).sigmoid() * (self.scale.exp()).clamp_max(10) + (self.c.sqrt() + 0.5)
+        scale = (time * time - self.c) / \
             (x_narrow * x_narrow).sum(dim=-1, keepdim=True).clamp_min(1e-8)
         x = torch.cat([time, x_narrow * scale.clamp_min(1e-8).sqrt()], dim=-1)
         return x

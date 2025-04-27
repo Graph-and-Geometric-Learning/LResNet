@@ -254,7 +254,7 @@ class LorentzDecoder(nn.Module):
         self.decode_adj = False
 
     def forward(self, x):
-        return (2 * self.c.reciprocal() + 2 * self.manifold.cinner(x, self.cls)) + self.bias
+        return (2 * self.c + 2 * self.manifold.cinner(x, self.cls)) + self.bias
 
     def step(self):
         for optimizer in self.optimizer:

@@ -39,7 +39,7 @@ class HypLayer(nn.Module):
             x_space = self.norm(x_space)
         
         x_space = x_space.permute(0, 2, 3, 1)
-        x_time = ((x_space ** 2).sum(-1, keepdims=True) + self.c.reciprocal()).clamp_min(1e-6).sqrt()
+        x_time = ((x_space ** 2).sum(-1, keepdims=True) + self.c).clamp_min(1e-6).sqrt()
         x = torch.cat([x_time, x_space], dim=-1)
         return x
 
@@ -138,7 +138,7 @@ class ResidualBlock(nn.Module):
         denom = (-self.manifold.inner(ave, ave, keepdim=True)).abs().clamp_min(1e-8).sqrt() * self.c.sqrt()
         x = ave / denom
         x_space = 2 * x[..., 1:]
-        x_time = ((x_space ** 2).sum(-1, keepdims=True) + self.c.reciprocal()).clamp_min(1e-6).sqrt()
+        x_time = ((x_space ** 2).sum(-1, keepdims=True) + self.c).clamp_min(1e-6).sqrt()
         x = torch.cat([x_time, x_space], dim=-1)
 
         x = self.act2(x)
@@ -187,7 +187,7 @@ class MidpointGlobalAvgPool2d(torch.nn.Module):
         x_space = x_space.permute(0, 3, 2, 1)
         x_space = self.avg_pool(x_space)
         x_space = x_space.permute(0, 2, 3, 1)
-        x_time = ((x_space ** 2).sum(-1, keepdims=True) + self.c.reciprocal()).clamp_min(1e-6).sqrt()
+        x_time = ((x_space ** 2).sum(-1, keepdims=True) + self.c).clamp_min(1e-6).sqrt()
         x = torch.cat([x_time, x_space], dim=-1)
         #map to poincare ball model for mlr
         x = self.linear_ball.logmap0(self.manifold.lorentz_to_poincare(x))

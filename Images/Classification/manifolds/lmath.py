@@ -372,7 +372,7 @@ def _expmap0(u, k: torch.Tensor, dim: int = -1):
     l_v = torch.cosh(nomin)
     r_v = torch.sinh(nomin) * u
     dn = r_v.size(dim) - 1
-    p = torch.cat((l_v *k.reciprocal().sqrt()  + r_v.narrow(dim, 0, 1), r_v.narrow(dim, 1, dn)), dim)
+    p = torch.cat((l_v *k.sqrt()  + r_v.narrow(dim, 0, 1), r_v.narrow(dim, 1, dn)), dim)
     return p
 
 
@@ -704,7 +704,7 @@ def lorentz_to_poincare(x, k, dim=-1):
         points on the Poincare disk
     """
     dn = x.size(dim) - 1
-    beta_sqrt = k.reciprocal().sqrt()
+    beta_sqrt = k.sqrt()
     x_space = x[..., 1:]
     x_space = beta_sqrt * x_space
     return x_space / (x.narrow(dim, 0, 1) + beta_sqrt)
